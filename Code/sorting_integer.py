@@ -105,7 +105,17 @@ def bucket_sort(numbers, num_buckets=10):
     """Sort given numbers by distributing into buckets representing subranges,
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    
+    => Bucket sort's time complexity depends on the sorting algorithm that's used to sort the buckets
+    and the distribution of the input data.  If the input data is evenly distributed, then the average case 
+    time complexity can be approximately O(n + n^2/k + k) where n is the number of items being sorted and k is
+    the number of buckets.  In the worst case, when the input data is not uniformly distributed (clustered), 
+    then the time complexity can approach O(n^2).
+    
+    TODO: Memory usage: ??? Why and under what conditions?
+    
+    => The worst case space complexity of bucket sort is O(n + k) where n is the number of items being sorted.
+    """
     
     """
     This code mutates generates an auxiliary output list rather than mutating the original list.
