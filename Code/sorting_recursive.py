@@ -6,8 +6,14 @@ from sorting_iterative import insertion_sort
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
+    
     TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    
+    => running time complexity of the merge function is O(n) because it has to iterate over the length of both lists.
+    
+    TODO: Memory usage: ??? Why and under what conditions?
+    => memorty usage of the merge function is O(n) because it creates a new list of items with length n to return.
+    """
     
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
