@@ -1,6 +1,8 @@
 #!python
 import random
 
+from sorting_recursive import merge_sort, quick_sort
+
 def counting_sort(numbers):
     """Sort given numbers (integers) by counting occurrences of each number,
     then looping over counts and copying that many numbers into output list.
@@ -104,20 +106,111 @@ def bucket_sort(numbers, num_buckets=10):
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
+    
+    """
+    This code mutates generates an auxiliary output list rather than mutating the original list.
+    """
+    
     # TODO: Find range of given numbers (minimum and maximum values)
-    # TODO: Create list of buckets to store numbers in subranges of input range
-    # TODO: Loop over given numbers and place each item in appropriate bucket
-    # TODO: Sort each bucket using any sorting algorithm (recursive or another)
-    # TODO: Loop over buckets and append each bucket's numbers into output list
+    # if len(numbers) <= 1:
+    #     return numbers
+    
+    # min = numbers[0]
+    # max = numbers[0]
+    
+    # for number in numbers:
+    #     if number < min:
+    #         min = number
+    #     if number > max:
+    #         max = number
+            
+    # num_buckets = len(numbers)
+    # # TODO: Create list of buckets to store numbers in subranges of input range
+    
+    # # this would typically be done using a linked list, but for simplicity we will use a list of lists
+    # bucket_list = []
+    
+    # for i in range(num_buckets):
+    #     # generate a pseudo-linked list with a list of empty lists
+    #     bucket_list.append([])
+    
+    # # TODO: Loop over given numbers and place each item in appropriate bucket
+    # for number in numbers:
+    #     # use a naive hash algorithm to efficiently find the correct bucket index
+    #     bucket_index = (number * len(numbers)) // (max + 1)
+    #     # place the item in the correct bucket
+    #     bucket_list[bucket_index].append(number)
+    
+    # # TODO: Sort each bucket using any sorting algorithm (recursive or another)
+    # # use imported implementation of merge sort for stability and efficiency
+    # for bucket in bucket_list:
+    #     merge_sort(bucket)
+    
+    # # TODO: Loop over buckets and append each bucket's numbers into output list
+    # # need to do this jank to pass the test file, this is not ideal by any means...
+    # output_list = []
+    
+    # for bucket in bucket_list:
+    #     output_list.extend(bucket)
+
+    # return output_list
+
     # FIXME: Improve this to mutate input instead of creating new output list
 
-# if __name__ == '__main__':
+    """
+    This code uses in-place sorting to mutate the input list rather than generating a 
+    second output list.
+    """
+    
+    if len(numbers) <= 1:
+        return numbers
+    
+    min = numbers[0]
+    max = numbers[0]
+    
+    for number in numbers:
+        if number < min:
+            min = number
+        if number > max:
+            max = number
+            
+    num_buckets = len(numbers)
+    
+    bucket_list = []
+    
+    for i in range(num_buckets):
+        bucket_list.append([])
+
+    for number in numbers:
+        bucket_index = (number * len(numbers)) // (max + 1)
+        bucket_list[bucket_index].append(number)
+    
+    for bucket in bucket_list:
+        # Use an in-place sorting algorithm here like quick sort or insertion sort.
+        # The choice of sorting method comes down to speed and memory requirements.
+        quick_sort(bucket)
+    
+    # TODO: Loop over buckets and append each bucket's numbers into the original array
+    index = 0
+    
+    for i in range(num_buckets):
+        for number in bucket_list[i]:
+            numbers[index] = number
+            index += 1
+    
+    return numbers
+
+if __name__ == '__main__':
+    pass
     # test_items_a = ['A']
     # test_items_b = [5, 3]
     # test_items_c = ['B', 'C', 'A']
     # test_items_d = 'Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()
     # test_items_e = 'one fish two fish red fish blue fish'.split()
-    # test_items_f = random.choices(range(10), k=15)
+    test_items_f = random.choices(range(20), k=10)
+    test_items_g = random.choices(range(50), k=20)
+    test_items_h = random.choices(range(100), k=30)
+    
     # test_items_f = [1,3,7,5,2,3,1,1,8,5,6,2,4,5,6,2,5,7,3,2]
     
     # print(merge_sort(test_items_a))
@@ -125,7 +218,10 @@ def bucket_sort(numbers, num_buckets=10):
     # print(merge_sort(test_items_c))
     # print(merge_sort(test_items_d))
     # print(counting_sort(test_items_e))
-    # print(test_items_f)
-    # print(sorted(test_items_f))
-    # print(counting_sort(test_items_f))
-    # assert counting_sort(test_items_f) == sorted(test_items_f)
+    print(test_items_f)
+    print(sorted(test_items_f))
+    print(bucket_sort(test_items_f))
+    assert bucket_sort(test_items_f) == sorted(test_items_f)
+    assert bucket_sort(test_items_g) == sorted(test_items_g)
+    assert bucket_sort(test_items_h) == sorted(test_items_h)
+    
