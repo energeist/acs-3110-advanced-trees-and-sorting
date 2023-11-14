@@ -1,14 +1,13 @@
 #!python
-
 import random
 
+from sorting_iterative import insertion_sort
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    
     
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
@@ -34,33 +33,28 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
+    
     TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    
+    => The running time of this iterative split_sort_merge is dependent on the sorting algorithm used.  With insertion sort, the worst and average cases are O(n^2) and the best case is O(n).
+    
+    TODO: Memory usage: ??? Why and under what conditions?
+    
+    => The memory usage of this iterative split_sort_merge is O(n) because the function creates a new list of items with length n to return.
+    
+    """
     
     # TODO: Split items list into approximately equal halves
     
-    half_one = items[:len(items)//2]
-    half_two = items[len(items)//2:]
-    whole_list = [half_one, half_two]
+    middle = len(items) // 2
+    half_one = items[:middle]
+    half_two = items[middle:]
     
     # TODO: Sort each half using any other sorting algorithm
     
     # sort with insertion sort
-    
-    for half in whole_list:
-    
-        if len(half) in [0,1]: # early return for sorted cases
-            return half
-        
-        for i in range(1, len(half)): # start counting from the second item in the list
-            key = half[i] # pick a pivot point that is being sorted on
-            j = i - 1 # start comparing against the previous item
-            
-            while j >= 0 and key < half[j]: # if the pivot is smaller than the previous item then it must swap
-                half[j + 1], half[j] = half[j], half[j + 1] # swap
-                j -= 1 # move backwards through list to keep checking whether pivot item is in the right place
-    
-        whole_list[whole_list.index(half)] = half
+    half_one = insertion_sort(half_one)
+    half_two = insertion_sort(half_two)
     
     # TODO: Merge sorted halves into one list in sorted order
     
@@ -81,24 +75,26 @@ def merge_sort(items):
     
     # TODO: Check if list is so small it's already sorted (base case)
     
-    length = len(items)
-    
-    if length <= 1:
+    if len(items) <= 1:
         return items # base case, return early
     
     # TODO: Split items list into approximately equal halves
     
-    else:
-        middle = length // 2
+    middle = len(items) // 2
         
     # TODO: Sort each half by recursively calling merge sort
         
-        left = merge_sort(items[:middle])
-        right = merge_sort(items[middle:])
+    left = merge_sort(items[:middle])
+    right = merge_sort(items[middle:])
     
     # TODO: Merge sorted halves into one list in sorted order
-        
-        return merge(left, right) # use the merge helper method we wrote earlier      
+    
+    # clear the original array and return the sorted version of it for tests
+    
+    items.clear()
+    items.extend(merge(left, right))    
+      
+    return items # use the merge helper method we wrote earlier      
 
 def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
@@ -199,31 +195,31 @@ if __name__ == '__main__':
     # print(merge(items3, items4))
     # print(merge(items5, items6))
     
-    # test_list = [1, 5, 3, 2, 7, 6, 4] # odd number
-    # print("split_sort_merge")
-    # print(split_sort_merge(test_list))
-    # print("merge_sort")
-    # print(merge_sort(test_list))
-    # test_list2 = [1, 5, 3, 2, 7, 6, 8, 4] # even number
-    # print("split_sort_merge")
-    # print(split_sort_merge(test_list2))
-    # print("merge_sort")
-    # print(merge_sort(test_list2))
-    # test_list3 = ["a", "e", "c", "b", "d", "f"]
-    # print("split_sort_merge")
-    # print(split_sort_merge(test_list3))
-    # print("merge_sort")
-    # print(merge_sort(test_list3))
-    # test_items_a = ['A']
-    # test_items_b = [5, 3]
-    # test_items_c = ['B', 'C', 'A']
-    # test_items_d = 'Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()
-    # test_items_e = 'one fish two fish red fish blue fish'.split()
-    # test_items_f = random.choices(range(10), k=10)
+    test_list = [1, 5, 3, 2, 7, 6, 4] # odd number
+    print("split_sort_merge")
+    print(split_sort_merge(test_list))
+    print("merge_sort")
+    print(merge_sort(test_list))
+    test_list2 = [1, 5, 3, 2, 7, 6, 8, 4] # even number
+    print("split_sort_merge")
+    print(split_sort_merge(test_list2))
+    print("merge_sort")
+    print(merge_sort(test_list2))
+    test_list3 = ["a", "e", "c", "b", "d", "f"]
+    print("split_sort_merge")
+    print(split_sort_merge(test_list3))
+    print("merge_sort")
+    print(merge_sort(test_list3))
+    test_items_a = ['A']
+    test_items_b = [5, 3]
+    test_items_c = ['B', 'C', 'A']
+    test_items_d = 'Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()
+    test_items_e = 'one fish two fish red fish blue fish'.split()
+    test_items_f = random.choices(range(10), k=10)
     
-    # print(merge_sort(test_items_a))
-    # print(merge_sort(test_items_b))
-    # print(merge_sort(test_items_c))
-    # print(merge_sort(test_items_d))
-    # print(merge_sort(test_items_e))
-    # print(merge_sort(test_items_f))
+    print(merge_sort(test_items_a))
+    print(merge_sort(test_items_b))
+    print(merge_sort(test_items_c))
+    print(merge_sort(test_items_d))
+    print(merge_sort(test_items_e))
+    print(merge_sort(test_items_f))
