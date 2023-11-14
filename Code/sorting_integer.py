@@ -114,7 +114,8 @@ def bucket_sort(numbers, num_buckets=10):
     
     TODO: Memory usage: ??? Why and under what conditions?
     
-    => The worst case space complexity of bucket sort is O(n + k) where n is the number of items being sorted.
+    => The space complexity of bucket sort is O(n + k) where n is the number of items being sorted
+    and k is the number of buckets in the bucket_list.
     """
     
     """
