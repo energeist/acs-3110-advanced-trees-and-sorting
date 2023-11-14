@@ -1,6 +1,5 @@
 #!python
 
-
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
@@ -67,9 +66,10 @@ def selection_sort(items):
     Time complexity:
     Worst case - O(n^2) - algorithm has to iterate over a double loop
     Average case - O(n^2) - same a above
-    Best case - O(n^2) - algorithm must complete nested loop traversal regardless of whether the list
-    is sorted or not, since we are picking a minimum and comparing to each following value, then moving
-    to the next in the list and performing the same action until all values are compared. 
+    Best case - O(n^2) - algorithm must complete nested loop traversal regardless of whether 
+    the list is sorted or not, since we are picking a minimum and comparing to each following 
+    value, then moving to the next in the list and performing the same action until all values 
+    are compared. 
     
     TODO: Memory usage: ??? Why and under what conditions?
     
@@ -84,15 +84,16 @@ def selection_sort(items):
         return items
     
     for i in range(len(items)): # iterate over the list of items
-        min_index = i # initially assume the minimum value for the iteration is the first item chosen 
+        # initially assume the minimum value for the iteration is the first item chosen 
+        min_index = i 
         
         for j in range(i+1, len(items)): # iterate over the remaining items
         
             if items[j] < items[min_index]: # if a smaller value is found
                 min_index = j # set that value to the minimum
         
-        items[min_index], items[i] = items[i], items[min_index] 
         # swap the smallest value found with the starting position of this iteration
+        items[min_index], items[i] = items[i], items[min_index] 
     
     return items
     
@@ -108,8 +109,8 @@ def insertion_sort(items):
     
     TODO: Memory usage: ??? Why and under what conditions?
     
-    Space complexity is always O(1), single values are stored in a few variables for tracking, otherwise
-    the list is sorted in place.
+    Space complexity is always O(1), single values are stored in a few variables for tracking, 
+    otherwise the list is sorted in place.
     """
     
     # TODO: Repeat until all items are in sorted order
