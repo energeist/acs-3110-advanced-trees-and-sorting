@@ -9,10 +9,12 @@ def merge(items1, items2):
     
     TODO: Running time: ??? Why and under what conditions?
     
-    => running time complexity of the merge function is O(n) because it has to iterate over the length of both lists.
+    => running time complexity of the merge function is O(n) because it has to iterate over the 
+    length of both lists.
     
     TODO: Memory usage: ??? Why and under what conditions?
-    => memorty usage of the merge function is O(n) because it creates a new list of items with length n to return.
+    => memorty usage of the merge function is O(n) because it creates a new list of items with 
+    length n to return.
     """
     
     # TODO: Repeat until one list is empty
@@ -42,12 +44,13 @@ def split_sort_merge(items):
     
     TODO: Running time: ??? Why and under what conditions?
     
-    => The running time of this iterative split_sort_merge is dependent on the sorting algorithm used.  With insertion sort, the worst and average cases are O(n^2) and the best case is O(n).
+    => The running time of this iterative split_sort_merge is dependent on the sorting algorithm used.
+    With insertion sort, the worst and average cases are O(n^2) and the best case is O(n).
     
     TODO: Memory usage: ??? Why and under what conditions?
     
-    => The memory usage of this iterative split_sort_merge is O(n) because the function creates a new list of items with length n to return.
-    
+    => The memory usage of this iterative split_sort_merge is O(n) because the function creates a new list 
+    of items with length n to return.
     """
     
     # TODO: Split items list into approximately equal halves
@@ -72,11 +75,17 @@ def merge_sort(items):
     
     TODO: Running time: ??? Why and under what conditions?
     
-    => The time complexity of merge sort is O(n log n) because the function calls recursively on split lists until the base case is reached (log n time) and each recursive call runs in O(n) time as it iterates over the length of a list of items, which yields O(n log n) time complexity.
+    => The time complexity of merge sort is O(n log n) because the function calls recursively on split lists 
+    until the base case is reached (log n time) and each recursive call runs in O(n) time as it iterates over 
+    the length of a list of items, which yields O(n log n) time complexity.
     
     TODO: Memory usage: ??? Why and under what conditions?
     
-    => Memory usage of merge sort is generally O(n) because the function calls recursively on split lists and is ~typically~ not an in-place sorting algorithm, so it uses memory to store the split lists instead of directly mutating the original list.  Several more complicated algorithms have been proposed to reduce the memory requirements of merge sort, but they have various complicated conditions and tradeoffs, and are not commonly used.
+    => Memory usage of merge sort is generally O(n) because the function calls recursively on split lists 
+    and is ~typically~ not an in-place sorting algorithm, so it uses memory to store the split lists instead 
+    of directly mutating the original list.  Several more complicated algorithms have been proposed to reduce 
+    the memory requirements of merge sort, but they have various complicated conditions and tradeoffs, and 
+    are not commonly used.
     """
     
     # TODO: Check if list is so small it's already sorted (base case)
@@ -109,7 +118,8 @@ def partition(items, low, high):
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     TODO: Running time: ??? Why and under what conditions?
     
-    => Running time for the partition helper function is O(n) because it has to iterate through the entire list once.
+    => Running time for the partition helper function is O(n) because it has to iterate through the entire 
+    list once.
     
     TODO: Memory usage: ??? Why and under what conditions?
     
@@ -120,10 +130,12 @@ def partition(items, low, high):
     # TODO: Choose a pivot any way and document your method in docstring above
     
     """
-    => Originally I had started by choosing the pivot as the middle element in the list but this had issues when testing with duplicate values.
-    After some research, I found that the Hoare partitioning scheme is a simple and effective way to choose a pivot that deals with duplicates well.
-    The Hoare partitioning scheme chooses the pivot as the first element in the list, and then swaps elements on the left and right sides of the list.
-    The left side of the list contains elements that are smaller than the pivot, and the right side of the list contains elements that are larger than the pivot.
+    => Originally I had started by choosing the pivot as the middle element in the list but this had issues 
+    when testing with duplicate values.  After some research, I found that the Hoare partitioning scheme is a 
+    simple and effective way to choose a pivot that deals with duplicates well.  The Hoare partitioning scheme 
+    chooses the pivot as the first element in the list, and then swaps elements on the left and right sides of 
+    the list.  The left side of the list contains elements that are smaller than the pivot, and the right 
+    side of the list contains elements that are larger than the pivot.
     """
     
     pivot = items[low]
@@ -201,31 +213,31 @@ if __name__ == '__main__':
     # print(merge(items3, items4))
     # print(merge(items5, items6))
     
-    test_list = [1, 5, 3, 2, 7, 6, 4] # odd number
-    print("split_sort_merge")
-    print(split_sort_merge(test_list))
-    print("merge_sort")
-    print(merge_sort(test_list))
-    test_list2 = [1, 5, 3, 2, 7, 6, 8, 4] # even number
-    print("split_sort_merge")
-    print(split_sort_merge(test_list2))
-    print("merge_sort")
-    print(merge_sort(test_list2))
-    test_list3 = ["a", "e", "c", "b", "d", "f"]
-    print("split_sort_merge")
-    print(split_sort_merge(test_list3))
-    print("merge_sort")
-    print(merge_sort(test_list3))
-    test_items_a = ['A']
-    test_items_b = [5, 3]
-    test_items_c = ['B', 'C', 'A']
-    test_items_d = 'Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()
-    test_items_e = 'one fish two fish red fish blue fish'.split()
-    test_items_f = random.choices(range(10), k=10)
+    # test_list = [1, 5, 3, 2, 7, 6, 4] # odd number
+    # print("split_sort_merge")
+    # print(split_sort_merge(test_list))
+    # print("merge_sort")
+    # print(merge_sort(test_list))
+    # test_list2 = [1, 5, 3, 2, 7, 6, 8, 4] # even number
+    # print("split_sort_merge")
+    # print(split_sort_merge(test_list2))
+    # print("merge_sort")
+    # print(merge_sort(test_list2))
+    # test_list3 = ["a", "e", "c", "b", "d", "f"]
+    # print("split_sort_merge")
+    # print(split_sort_merge(test_list3))
+    # print("merge_sort")
+    # print(merge_sort(test_list3))
+    # test_items_a = ['A']
+    # test_items_b = [5, 3]
+    # test_items_c = ['B', 'C', 'A']
+    # test_items_d = 'Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()
+    # test_items_e = 'one fish two fish red fish blue fish'.split()
+    # test_items_f = random.choices(range(10), k=10)
     
-    print(merge_sort(test_items_a))
-    print(merge_sort(test_items_b))
-    print(merge_sort(test_items_c))
-    print(merge_sort(test_items_d))
-    print(merge_sort(test_items_e))
-    print(merge_sort(test_items_f))
+    # print(merge_sort(test_items_a))
+    # print(merge_sort(test_items_b))
+    # print(merge_sort(test_items_c))
+    # print(merge_sort(test_items_d))
+    # print(merge_sort(test_items_e))
+    # print(merge_sort(test_items_f))
