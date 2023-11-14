@@ -3,9 +3,10 @@
 from sorting import random_ints
 from sorting_iterative import is_sorted, bubble_sort, selection_sort, insertion_sort
 from sorting_recursive import merge_sort, quick_sort
+from sorting_integer import counting_sort, bucket_sort
 
-sort = bubble_sort
-
+sort = counting_sort
+    
 def test_is_sorted_on_sorted_integers():
     # Positive test cases (examples) with lists of sorted integers
     assert is_sorted([]) is True  # Empty lists are vacuously sorted
