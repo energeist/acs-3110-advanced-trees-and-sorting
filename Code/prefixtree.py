@@ -23,6 +23,7 @@ class PrefixTree:
         self.root = PrefixTreeNode(PrefixTree.START_CHARACTER)
         # Count the number of strings inserted into the tree
         self.size = 0
+        
         # Insert each string, if any were given
         if strings is not None:
             for string in strings:
@@ -38,9 +39,8 @@ class PrefixTree:
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
-        # print(f"string in contains: {string}")
-        # print(f"find node: {self._find_node(string)}")
         deepest_node, depth = self._find_node(string)
+        
         if deepest_node.terminal == True and depth == len(string):
             return True
         else:
@@ -49,23 +49,24 @@ class PrefixTree:
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
-        print(f'insert({string!r})')
-        node = self.root
-        print(f"self.contains(string): {self.contains(string)}")
+        if type(string) == str:
+            string = [string]
         
-        if not self.contains(string):
-            for character in string:
-                print(character)
-                if not node.has_child(character):
-                    node.add_child(character, PrefixTreeNode(character))
-                node = node.get_child(character)
-            node.terminal = True
-            self.size += 1
-        
-        # I would love to raise an error here for a repeat insert but that breaks the tests...
-        
-        # else:
-        #     raise ValueError(f'String already exists: {string!r}')
+        for item in string:
+            node = self.root
+            
+            if not self.contains(item):
+                for character in item:
+                    if not node.has_child(character):
+                        node.add_child(character, PrefixTreeNode(character))
+                    node = node.get_child(character)
+                node.terminal = True
+                self.size += 1
+            
+            # I would love to raise an error here for a repeat insert but that breaks the tests...
+            
+            # else:
+            #     raise ValueError(f'String already exists: {string!r}')
             
         
 
@@ -77,16 +78,15 @@ class PrefixTree:
         # Match the empty string
         if len(string) == 0:
             return self.root, 0
+        
         # Start with the root node
         node = self.root
         height = 0
-        print(f"string in find node: {string}")
+        
         for character in string:
-            print(f"character in string: {character}")
             if node.has_child(character):
                 node = node.get_child(character)
                 height += 1
-        print(f"node, height: {node}, {height}")
         return node, height
 
     def complete(self, prefix):
@@ -94,21 +94,38 @@ class PrefixTree:
         with the given prefix string."""
         # Create a list of completions in prefix tree
         completions = []
+        node = self.root
         
-
+        for character in prefix:
+            if node.has_child(character):
+                node = node.get_child(character)
+            else:
+                return completions
+        
+        self._traverse(node, prefix, lambda x: completions.append(x))
+        
+        return completions
+        
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
         all_strings = []
-        node = self.root
         
+        self._traverse(self.root, '', lambda x: all_strings.append(x))
+        
+        return all_strings
+              
 
-    def _traverse(self, node, prefix, visit):
+    def _traverse(self, node=None, prefix='', visit=lambda x: print(x)):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node with the given prefix representing its path in
         this prefix tree and visit each node with the given visit function."""
-        # TODO
-
+        
+        if node.terminal:
+            visit(prefix)
+            
+        for child in node.children:
+            self._traverse(child, prefix + child.character, visit)
 
 def create_prefix_tree(strings):
     print(f'strings: {strings}')
