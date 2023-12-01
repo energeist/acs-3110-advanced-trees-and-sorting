@@ -69,7 +69,26 @@ def counting_sort(numbers):
     """
 
     # TODO: Find range of given numbers (minimum and maximum integer values)
+
+def counting_sort(numbers):
+    """Sort given numbers (integers) by counting occurrences of each number,
+    then looping over counts and copying that many numbers into output list.
+    TODO: Running time: ??? Why and under what conditions?
     
+    => The running time complexity of counting sort is O(n+k) where n is the number of items
+    being sorted and k is the range item values, which also represents the length
+    of the counting array.
+    
+    TODO: Memory usage: ??? Why and under what conditions?
+    
+    => For an in-place sorting case where the original array is mutated, the memory usage is O(k).
+    If the original array is preserved and an auxiliary output list is used, then the memory 
+    usage is O(n+k).
+    """
+    
+    if len(numbers) <= 1:
+        return numbers
+        
     min = numbers[0]
     max = numbers[0]
     
@@ -100,23 +119,6 @@ def counting_sort(numbers):
             index += 1
             
     return numbers
-    
-def bucket_sort(numbers, num_buckets=10):
-    """Sort given numbers by distributing into buckets representing subranges,
-    then sorting each bucket and concatenating all buckets in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    
-    => Bucket sort's time complexity depends on the sorting algorithm that's used to sort the buckets
-    and the distribution of the input data.  If the input data is evenly distributed, then the average case 
-    time complexity can be approximately O(n + n^2/k + k) where n is the number of items being sorted and k is
-    the number of buckets.  In the worst case, when the input data is not uniformly distributed (clustered), 
-    then the time complexity can approach O(n^2).
-    
-    TODO: Memory usage: ??? Why and under what conditions?
-    
-    => The space complexity of bucket sort is O(n + k) where n is the number of items being sorted
-    and k is the number of buckets in the bucket_list.
-    """
     
     """
     This code mutates generates an auxiliary output list rather than mutating the original list.
@@ -167,6 +169,23 @@ def bucket_sort(numbers, num_buckets=10):
     # return output_list
 
     # FIXME: Improve this to mutate input instead of creating new output list
+    
+def bucket_sort(numbers, num_buckets=10):
+    """Sort given numbers by distributing into buckets representing subranges,
+    then sorting each bucket and concatenating all buckets in sorted order.
+    TODO: Running time: ??? Why and under what conditions?
+    
+    => Bucket sort's time complexity depends on the sorting algorithm that's used to sort the buckets
+    and the distribution of the input data.  If the input data is evenly distributed, then the average case 
+    time complexity can be approximately O(n + n^2/k + k) where n is the number of items being sorted and k is
+    the number of buckets.  In the worst case, when the input data is not uniformly distributed (clustered), 
+    then the time complexity can approach O(n^2).
+    
+    TODO: Memory usage: ??? Why and under what conditions?
+    
+    => The space complexity of bucket sort is O(n + k) where n is the number of items being sorted
+    and k is the number of buckets in the bucket_list.
+    """
 
     """
     This code uses in-place sorting to mutate the input list rather than generating a 

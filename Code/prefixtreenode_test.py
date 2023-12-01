@@ -30,6 +30,10 @@ class PrefixTreeNodeTest(unittest.TestCase):
             node_A.get_child('B')
         # Create node 'B' and add it as child to node 'A'
         node_B = PrefixTreeNode('B')
+        # print("begin ----")
+        # print(node_A)
+        # print(node_B)
+        # print("end ----")
         node_A.add_child('B', node_B)
         # Verify node 'A' has node 'B' as child
         assert node_A.num_children() == 1

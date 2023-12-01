@@ -2,7 +2,6 @@
 
 from prefixtreenode import PrefixTreeNode
 
-
 class PrefixTree:
     """PrefixTree: A multi-way prefix tree that stores strings with efficient
     methods to insert a string into the tree, check if it contains a matching
@@ -35,15 +34,40 @@ class PrefixTree:
 
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
-        # TODO
+        return True if self.root.num_children() == 0 else False
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
-        # TODO
+        # print(f"string in contains: {string}")
+        # print(f"find node: {self._find_node(string)}")
+        deepest_node, depth = self._find_node(string)
+        if deepest_node.terminal == True and depth == len(string):
+            return True
+        else:
+            return False
+        
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
-        # TODO
+        print(f'insert({string!r})')
+        node = self.root
+        print(f"self.contains(string): {self.contains(string)}")
+        
+        if not self.contains(string):
+            for character in string:
+                print(character)
+                if not node.has_child(character):
+                    node.add_child(character, PrefixTreeNode(character))
+                node = node.get_child(character)
+            node.terminal = True
+            self.size += 1
+        
+        # I would love to raise an error here for a repeat insert but that breaks the tests...
+        
+        # else:
+        #     raise ValueError(f'String already exists: {string!r}')
+            
+        
 
     def _find_node(self, string):
         """Return a pair containing the deepest node in this prefix tree that
@@ -55,20 +79,29 @@ class PrefixTree:
             return self.root, 0
         # Start with the root node
         node = self.root
-        # TODO
+        height = 0
+        print(f"string in find node: {string}")
+        for character in string:
+            print(f"character in string: {character}")
+            if node.has_child(character):
+                node = node.get_child(character)
+                height += 1
+        print(f"node, height: {node}, {height}")
+        return node, height
 
     def complete(self, prefix):
         """Return a list of all strings stored in this prefix tree that start
         with the given prefix string."""
         # Create a list of completions in prefix tree
         completions = []
-        # TODO
+        
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
         all_strings = []
-        # TODO
+        node = self.root
+        
 
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
